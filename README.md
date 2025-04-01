@@ -13,13 +13,15 @@ This script deletes all temporary files from the system's `%temp%` directory wit
 2. **Copy and Paste** the following code into the `.bat` file:
    ```batch
    @echo off
+   chcp 65001 >nul  & REM Enable UTF-8 for better emoji support
    cls
-   echo Cleaning temporary files...
+   echo 🔄 Cleaning temporary files...
    del /s /q "%temp%\*.*"
-   rmdir /s /q "%temp%"
-   mkdir "%temp%"
-   echo Temporary files deleted successfully!
-   pause
+   for /d %%i in ("%temp%\*") do rmdir /s /q "%%i"
+   echo ✅ Temporary files deleted successfully!
+   timeout /t 2 >nul
+   exit
+
    ```
 3. **Save** the file with a `.bat` extension (e.g., `delete_temp.bat`).
 4. **Run** the script by double-clicking it.
